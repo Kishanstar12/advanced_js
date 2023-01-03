@@ -1,3 +1,5 @@
+var time=new Date();
+
 const posts = [
     { title: 'post1', body: 'post 1 is created' },
     { title: 'post2', body: 'post 2 is created' },
@@ -54,6 +56,30 @@ function deletePost(){
 // deletePost().then(getPost);
 //deletePost().then(getPost).catch(err => alert(err));
 
-createPost({title:'post 4',body:'post 4 is created'}).then(setTimeout(() =>{
-    deletePost().then(getPost);
-},1000))
+// createPost({title:'post 4',body:'post 4 is created'}).then(setTimeout(() =>{
+//     deletePost().then(getPost);
+// },1000))
+
+// const promise1=Promise.resolve('Hello world');
+// const promise2=10;
+// const promise3=new Promise((resolve,reject) =>{
+//     setTimeout(resolve,2000,'goodbye')
+// });
+
+// Promise.all([promise1,promise2,promise3]).then( values =>console.log(values));
+
+promise1=createPost({title:'post 4',body:'Post 4 created'});
+promise2=new Promise((resolve,reject) => {
+    setTimeout(() => {
+    time=new Date('january 01,2023,13:55:00');
+    resolve();
+    },1000);
+});
+
+Promise.all([promise1,promise2]).then(() =>{
+   console.log(posts);
+   console.log(`last active at ${time}`);
+}).then(() =>{
+    deletePost();
+    console.log(posts);
+});
